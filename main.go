@@ -1,17 +1,27 @@
 package main
 
 import (
+	"flag"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/sonroyaalmerol/musiqlx/components"
 	"github.com/sonroyaalmerol/musiqlx/pages"
+	"github.com/sonroyaalmerol/musiqlx/utils"
 )
 
 var count = 0
 
 func main() {
+	// Parse command-line flags
+	isDevMode := flag.Bool("dev", false, "Enable development mode")
+	flag.Parse()
+
+	if *isDevMode {
+		utils.Dev()
+	}
+
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 
