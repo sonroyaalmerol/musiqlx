@@ -5,6 +5,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	"github.com/sonroyaalmerol/musiqlx/components"
 	"github.com/sonroyaalmerol/musiqlx/pages"
 )
 
@@ -21,8 +22,8 @@ func main() {
 
 	r.Post("/add", func(w http.ResponseWriter, r *http.Request) {
 		count++
-		page := pages.Index(count)
-		page.Render(r.Context(), w)
+		counter := components.Counter(count)
+		counter.Render(r.Context(), w)
 	})
 
 	r.Handle("/static/*", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))

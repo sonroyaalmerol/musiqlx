@@ -1,19 +1,35 @@
 package pages 
 
-import "strconv"
+import "github.com/sonroyaalmerol/musiqlx/components"
 
 templ Index(counter int) {
-  <html>
+	<html>
 		<head>
 			<meta charset="UTF-8"/>
 			<title>MusiQLx</title>
-			<script src="https://cdn.tailwindcss.com"></script>
 			<script src="/static/js/htmx.min.js"></script>
+			<script src="/static/js/css-scope-inline.js"></script>
 		</head>
 		<body>
-			<div class="flex flex-col justify-center items-center h-screen">
-				<button class="border rounded p-2" hx-post="/add" hx-target="html">Add</button>
-				<p>{ strconv.Itoa(counter) }</p>
+			<div>
+				<style>
+          me {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+          }
+          me button {
+            border-width: 1px;
+            border-style: solid;
+            border-color: #e5e7eb;
+            border-radius: 0.25rem;
+            padding: 0.5rem;
+          }
+        </style>
+				<button hx-post="/add" hx-target="#counter" hx-swap="outerHTML">Add</button>
+				@components.Counter(counter)
 			</div>
 		</body>
 	</html>
