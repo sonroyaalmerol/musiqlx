@@ -25,7 +25,7 @@ func Index(counter int) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<html><head><meta charset=\"UTF-8\"><title>MusiQLx</title><script src=\"/static/js/htmx.min.js\"></script><script src=\"/static/js/css-scope-inline.js\"></script></head><body><div><style>\n          me {\n            display: flex;\n            flex-direction: column;\n            justify-content: center;\n            align-items: center;\n            height: 100vh;\n          }\n          me button {\n            border-width: 1px;\n            border-style: solid;\n            border-color: #e5e7eb;\n            border-radius: 0.25rem;\n            padding: 0.5rem;\n          }\n        </style><button hx-post=\"/add\" hx-target=\"#counter\" hx-swap=\"outerHTML\">Add</button>")
+		templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 1)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -33,7 +33,7 @@ func Index(counter int) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></body></html>")
+		templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 2)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
