@@ -20,6 +20,7 @@ func main() {
 
 	if *isDevMode {
 		utils.Dev()
+		return
 	}
 
 	r := chi.NewRouter()

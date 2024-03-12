@@ -20,13 +20,6 @@ func checkCommandInstalled(command string) bool {
 }
 
 func Dev() {
-	// Check if gow is installed
-	if !checkCommandInstalled("gow") {
-		fmt.Println("Error: gow is not installed.")
-		fmt.Println("go install github.com/mitranim/gow@latest")
-		return
-	}
-
 	// Check if templ is installed
 	if !checkCommandInstalled("templ") {
 		fmt.Println("Error: templ is not installed.")
@@ -37,23 +30,14 @@ func Dev() {
 	var wg sync.WaitGroup
 
 	// Add the number of goroutines to wait for
-	wg.Add(2)
-
-	// Running "gow run main.go" in a goroutine
-	go func() {
-		defer wg.Done()
-		err := runCommand("gow", "run", ".")
-		if err != nil {
-			fmt.Println("Error running gow:", err)
-		}
-	}()
+	wg.Add(1)
 
 	// Running "templ generate -watch" in a goroutine
 	go func() {
 		defer wg.Done()
-		err := runCommand("templ", "generate", "-watch")
+		err := runCommand("templ", "generate", "--watch", "--proxy=http://localhost:3000", "--cmd=go run .")
 		if err != nil {
-			fmt.Println("Error running templ generate -watch:", err)
+			fmt.Println("Error running templ generate --watch:", err)
 		}
 	}()
 
