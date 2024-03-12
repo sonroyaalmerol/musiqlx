@@ -6,31 +6,20 @@ templ Index(counter int) {
 	<html>
 		<head>
 			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1"/>
 			<title>MusiQLx</title>
 			<script src="/static/js/htmx.min.js"></script>
-			<script src="/static/js/css-scope-inline.js"></script>
+			<link href="/static/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"/>
 		</head>
 		<body>
-			<div>
-				<style>
-          me {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-          }
-          me button {
-            border-width: 1px;
-            border-style: solid;
-            border-color: #e5e7eb;
-            border-radius: 0.25rem;
-            padding: 0.5rem;
-          }
-        </style>
-				<button hx-post="/add" hx-target="#counter" hx-swap="outerHTML">Add</button>
-				@components.Counter(counter)
-			</div>
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <button type="button" class="btn btn-primary" hx-post="/add" hx-target="#counter" hx-swap="outerHTML">Add</button>
+          @components.Counter(counter)
+        </div>
+      </div>
+
+			<script src="/static/js/bootstrap/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 		</body>
 	</html>
 }
