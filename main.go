@@ -4,11 +4,16 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gorilla/mux"
 	"github.com/sonroyaalmerol/musiqlx/internal/pkg/router"
+	"github.com/sonroyaalmerol/musiqlx/web"
 )
 
 func main() {
-	api := router.ApiRouter()
+	r := mux.NewRouter()
 
-	log.Fatal(http.ListenAndServe(":8080", api))
+	router.RegisterRoutes(r)
+	web.RegisterRoutes(r)
+
+	log.Fatal(http.ListenAndServe(":8686", r))
 }

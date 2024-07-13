@@ -6,9 +6,7 @@ import (
 	"github.com/sonroyaalmerol/musiqlx/internal/pkg/middlewares"
 )
 
-func ApiRouter() *mux.Router {
-	r := mux.NewRouter()
-
+func RegisterRoutes(r *mux.Router) {
 	// Apply the middleware for API key validation
 	r.Use(middlewares.ApiKeyMiddleware)
 
@@ -121,6 +119,4 @@ func ApiRouter() *mux.Router {
 	r.HandleFunc("/api/v1/config/host/{id}", getHostConfig).Methods("GET")
 	r.HandleFunc("/api/v1/config/host/{id}", updateHostConfig).Methods("PUT")
 	r.HandleFunc("/api/v1/config/host", getHostConfigs).Methods("GET")
-
-	return r
 }
