@@ -4,7 +4,7 @@
 
 MusiQLx is a music collection manager designed with user experience as the top priority. My aim is to provide a self-hosted solution with an experience comparable to commercial solutions such as Spotify and Apple Music, offering seamless organization and management of your music library. MusiQLx caters to users who prefer sourcing their music from platforms like YouTube Music, Deezer, and MusicBrainz, providing a diverse array of options while ensuring a smooth and enjoyable experience.
 
-Yes, this is a Lidarr alternative.
+Yes, this is a Lidarr alternative. One of the main goals is to make the API compatible with Lidarr so it will be a drop-in replacement for third-party applications.
 
 ## Key Features
 
