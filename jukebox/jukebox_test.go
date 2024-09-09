@@ -9,7 +9,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
-	"go.senan.xyz/gonic/jukebox"
+	"github.com/sonroyaalmerol/musiqlx/jukebox"
 )
 
 func TestPlaySkipReset(t *testing.T) {

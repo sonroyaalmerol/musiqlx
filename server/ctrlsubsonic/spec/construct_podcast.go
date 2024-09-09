@@ -1,7 +1,7 @@
 package spec
 
 import (
-	"go.senan.xyz/gonic/db"
+	"github.com/sonroyaalmerol/musiqlx/db"
 )
 
 func NewPodcastChannel(p *db.Podcast) *PodcastChannel {

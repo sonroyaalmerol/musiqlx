@@ -14,11 +14,11 @@ import (
 	"github.com/google/uuid"
 	"github.com/jinzhu/gorm"
 
-	"go.senan.xyz/gonic/db"
-	"go.senan.xyz/gonic/handlerutil"
-	"go.senan.xyz/gonic/server/ctrlsubsonic/params"
-	"go.senan.xyz/gonic/server/ctrlsubsonic/spec"
-	"go.senan.xyz/gonic/server/ctrlsubsonic/specid"
+	"github.com/sonroyaalmerol/musiqlx/db"
+	"github.com/sonroyaalmerol/musiqlx/handlerutil"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic/params"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic/spec"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic/specid"
 )
 
 func (c *Controller) ServeGetArtists(r *http.Request) *spec.Response {

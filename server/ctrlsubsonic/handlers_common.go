@@ -15,13 +15,13 @@ import (
 	"github.com/google/uuid"
 	"github.com/jinzhu/gorm"
 
-	"go.senan.xyz/gonic/db"
-	"go.senan.xyz/gonic/scanner"
-	"go.senan.xyz/gonic/scrobble"
-	"go.senan.xyz/gonic/server/ctrlsubsonic/params"
-	"go.senan.xyz/gonic/server/ctrlsubsonic/spec"
-	"go.senan.xyz/gonic/server/ctrlsubsonic/specid"
-	"go.senan.xyz/gonic/server/ctrlsubsonic/specidpaths"
+	"github.com/sonroyaalmerol/musiqlx/db"
+	"github.com/sonroyaalmerol/musiqlx/scanner"
+	"github.com/sonroyaalmerol/musiqlx/scrobble"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic/params"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic/spec"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic/specid"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic/specidpaths"
 )
 
 func (c *Controller) ServeGetLicence(_ *http.Request) *spec.Response {

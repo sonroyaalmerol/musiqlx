@@ -17,15 +17,15 @@ import (
 	jd "github.com/josephburnett/jd/lib"
 	"github.com/stretchr/testify/require"
 
-	"go.senan.xyz/gonic"
-	"go.senan.xyz/gonic/db"
-	"go.senan.xyz/gonic/mockfs"
-	"go.senan.xyz/gonic/server/ctrlsubsonic/params"
-	"go.senan.xyz/gonic/transcode"
+	"github.com/sonroyaalmerol/musiqlx"
+	"github.com/sonroyaalmerol/musiqlx/db"
+	"github.com/sonroyaalmerol/musiqlx/mockfs"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic/params"
+	"github.com/sonroyaalmerol/musiqlx/transcode"
 )
 
 func TestMain(m *testing.M) {
-	gonic.Version = ""
+	musiqlx.Version = ""
 	log.SetOutput(io.Discard)
 	os.Exit(m.Run())
 }
@@ -100,7 +100,7 @@ func runQueryCases(t *testing.T, h handlerSubsonic, cases []*queryCase) {
 			}
 
 			goldenPath := makeGoldenPath(t.Name())
-			goldenRegen := os.Getenv("GONIC_REGEN")
+			goldenRegen := os.Getenv("MUSIQLX_REGEN")
 			if goldenRegen == "*" || (goldenRegen != "" && strings.HasPrefix(t.Name(), goldenRegen)) {
 				_ = os.WriteFile(goldenPath, []byte(body), 0o600)
 				t.Logf("golden file %q regenerated for %s", goldenPath, t.Name())
@@ -124,7 +124,7 @@ func runQueryCases(t *testing.T, h handlerSubsonic, cases []*queryCase) {
 
 			if len(diff) > 0 {
 				t.Errorf("\u001b[31;1mhandler json differs from test json\u001b[0m")
-				t.Errorf("\u001b[33;1mif you want to regenerate it, re-run with GONIC_REGEN=%s\u001b[0m\n", t.Name())
+				t.Errorf("\u001b[33;1mif you want to regenerate it, re-run with MUSIQLX_REGEN=%s\u001b[0m\n", t.Name())
 				t.Error(diff.Render())
 			}
 		})

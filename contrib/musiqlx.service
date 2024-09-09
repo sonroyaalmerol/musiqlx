@@ -1,0 +1,19 @@
+[Unit]
+Description=musiqlx service
+After=network.target
+
+[Service]
+Type=simple
+User=musiqlx
+Group=musiqlx
+
+StateDirectory=musiqlx
+CacheDirectory=musiqlx
+
+Restart=on-failure
+RestartSec=10
+
+ExecStart=/usr/local/bin/musiqlx -config-path /etc/musiqlx/config
+
+[Install]
+WantedBy=multi-user.target

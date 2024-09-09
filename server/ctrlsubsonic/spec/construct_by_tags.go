@@ -4,7 +4,7 @@ import (
 	"path/filepath"
 	"sort"
 
-	"go.senan.xyz/gonic/db"
+	"github.com/sonroyaalmerol/musiqlx/db"
 )
 
 func NewAlbumByTags(a *db.Album, artists []*db.Artist) *Album {

@@ -9,8 +9,8 @@ import (
 	"time"
 
 	"github.com/jinzhu/gorm"
-	"go.senan.xyz/gonic/db"
-	"go.senan.xyz/gonic/lastfm"
+	"github.com/sonroyaalmerol/musiqlx/db"
+	"github.com/sonroyaalmerol/musiqlx/lastfm"
 )
 
 const keepFor = 30 * time.Hour * 24

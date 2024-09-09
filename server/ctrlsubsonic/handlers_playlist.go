@@ -11,12 +11,12 @@ import (
 
 	"github.com/jinzhu/gorm"
 
-	"go.senan.xyz/gonic/db"
-	playlistp "go.senan.xyz/gonic/playlist"
-	"go.senan.xyz/gonic/server/ctrlsubsonic/params"
-	"go.senan.xyz/gonic/server/ctrlsubsonic/spec"
-	"go.senan.xyz/gonic/server/ctrlsubsonic/specid"
-	"go.senan.xyz/gonic/server/ctrlsubsonic/specidpaths"
+	"github.com/sonroyaalmerol/musiqlx/db"
+	playlistp "github.com/sonroyaalmerol/musiqlx/playlist"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic/params"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic/spec"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic/specid"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic/specidpaths"
 )
 
 func (c *Controller) ServeGetPlaylists(r *http.Request) *spec.Response {

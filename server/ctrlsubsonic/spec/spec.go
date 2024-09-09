@@ -6,8 +6,8 @@ import (
 	"strings"
 	"time"
 
-	"go.senan.xyz/gonic"
-	"go.senan.xyz/gonic/server/ctrlsubsonic/specid"
+	"github.com/sonroyaalmerol/musiqlx"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic/specid"
 	"jaytaylor.com/html2text"
 )
 
@@ -76,8 +76,8 @@ func NewResponse() *Response {
 		Status:        "ok",
 		XMLNS:         xmlns,
 		Version:       apiVersion,
-		Type:          gonic.Name,
-		ServerVersion: gonic.Version,
+		Type:          musiqlx.Name,
+		ServerVersion: musiqlx.Version,
 		OpenSubsonic:  true,
 	}
 }

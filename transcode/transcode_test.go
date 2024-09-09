@@ -14,7 +14,7 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/require"
-	"go.senan.xyz/gonic/transcode"
+	"github.com/sonroyaalmerol/musiqlx/transcode"
 )
 
 var testProfile = transcode.PCM16le

@@ -13,8 +13,8 @@ import (
 	"time"
 
 	"github.com/andybalholm/cascadia"
-	"go.senan.xyz/gonic/db"
-	"go.senan.xyz/gonic/scrobble"
+	"github.com/sonroyaalmerol/musiqlx/db"
+	"github.com/sonroyaalmerol/musiqlx/scrobble"
 	"golang.org/x/net/html"
 )
 

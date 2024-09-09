@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"testing"
 
-	"go.senan.xyz/gonic/server/ctrlsubsonic/spec"
-	"go.senan.xyz/gonic/server/ctrlsubsonic/specid"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic/spec"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic/specid"
 )
 
 const station1ID = "ir-1"

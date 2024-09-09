@@ -1,4 +1,4 @@
-module go.senan.xyz/gonic
+module github.com/sonroyaalmerol/musiqlx
 
 go 1.21
 

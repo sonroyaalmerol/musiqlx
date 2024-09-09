@@ -24,10 +24,10 @@ COPY go.mod .
 COPY go.sum .
 RUN go mod download
 COPY . .
-RUN GOOS=linux go build -o gonic cmd/gonic/gonic.go
+RUN GOOS=linux go build -o musiqlx cmd/musiqlx/musiqlx.go
 
 FROM alpine:3.19
-LABEL org.opencontainers.image.source https://github.com/sentriz/gonic
+LABEL org.opencontainers.image.source https://github.com/sentriz/musiqlx
 RUN apk add -U --no-cache \
     ffmpeg \
     mpv \
@@ -42,16 +42,16 @@ COPY --from=builder \
     /usr/lib/libtag.so.2 \
     /usr/lib/
 COPY --from=builder \
-    /src/gonic \
+    /src/musiqlx \
     /bin/
 VOLUME ["/cache", "/data", "/music", "/podcasts"]
 EXPOSE 80
 ENV TZ ""
-ENV GONIC_DB_PATH /data/gonic.db
-ENV GONIC_LISTEN_ADDR :80
-ENV GONIC_MUSIC_PATH /music
-ENV GONIC_PODCAST_PATH /podcasts
-ENV GONIC_CACHE_PATH /cache
-ENV GONIC_PLAYLISTS_PATH /playlists
+ENV MUSIQLX_DB_PATH /data/musiqlx.db
+ENV MUSIQLX_LISTEN_ADDR :80
+ENV MUSIQLX_MUSIC_PATH /music
+ENV MUSIQLX_PODCAST_PATH /podcasts
+ENV MUSIQLX_CACHE_PATH /cache
+ENV MUSIQLX_PLAYLISTS_PATH /playlists
 ENTRYPOINT ["/sbin/tini", "--"]
-CMD ["gonic"]
+CMD ["musiqlx"]

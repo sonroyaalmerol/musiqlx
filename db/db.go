@@ -16,7 +16,7 @@ import (
 	"github.com/mattn/go-sqlite3"
 
 	// TODO: remove this dep
-	"go.senan.xyz/gonic/server/ctrlsubsonic/specid"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic/specid"
 )
 
 func DefaultOptions() url.Values {

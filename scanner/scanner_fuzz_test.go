@@ -11,7 +11,7 @@ import (
 
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	"github.com/stretchr/testify/assert"
-	"go.senan.xyz/gonic/mockfs"
+	"github.com/sonroyaalmerol/musiqlx/mockfs"
 )
 
 func FuzzScanner(f *testing.F) {

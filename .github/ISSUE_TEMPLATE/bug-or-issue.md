@@ -8,7 +8,7 @@ assignees: ""
 
 <!-- please fill these out: -->
 
-gonic version:
+musiqlx version:
 
 if from docker, docker tag:
 if from source, git tag/branch:

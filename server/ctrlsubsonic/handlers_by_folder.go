@@ -7,9 +7,9 @@ import (
 
 	"github.com/jinzhu/gorm"
 
-	"go.senan.xyz/gonic/db"
-	"go.senan.xyz/gonic/server/ctrlsubsonic/params"
-	"go.senan.xyz/gonic/server/ctrlsubsonic/spec"
+	"github.com/sonroyaalmerol/musiqlx/db"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic/params"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic/spec"
 )
 
 // the subsonic spec mentions "artist" a lot when talking about the

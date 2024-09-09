@@ -6,7 +6,7 @@ MusiQLx is mainly a Subsonic server that aims to skip the idea of having a "Lida
 
 Instead of being a Lidarr alternative, why not eliminate that part of the stack completely. :)
 
-This project will start as a fork of [gonic](https://github.com/sentriz/gonic) but will not be using it as an upstream for long.
+This project will start as a fork of [musiqlx](https://github.com/sentriz/musiqlx) but will not be using it as an upstream for long.
 
 ## Getting Started
 

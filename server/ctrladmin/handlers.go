@@ -16,11 +16,11 @@ import (
 	"github.com/mmcdole/gofeed"
 	"github.com/nfnt/resize"
 
-	"go.senan.xyz/gonic/db"
-	"go.senan.xyz/gonic/handlerutil"
-	"go.senan.xyz/gonic/listenbrainz"
-	"go.senan.xyz/gonic/scanner"
-	"go.senan.xyz/gonic/transcode"
+	"github.com/sonroyaalmerol/musiqlx/db"
+	"github.com/sonroyaalmerol/musiqlx/handlerutil"
+	"github.com/sonroyaalmerol/musiqlx/listenbrainz"
+	"github.com/sonroyaalmerol/musiqlx/scanner"
+	"github.com/sonroyaalmerol/musiqlx/transcode"
 )
 
 func (c *Controller) ServeNotFound(_ *http.Request) *Response {

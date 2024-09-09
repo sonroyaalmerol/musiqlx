@@ -12,7 +12,7 @@ WORKDIR /src
 COPY . .
 RUN --mount=type=cache,target=/go/pkg/mod \
     --mount=type=cache,target=/root/.cache/go-build \
-    GOOS=linux go build -o gonic cmd/gonic/gonic.go
+    GOOS=linux go build -o musiqlx cmd/musiqlx/musiqlx.go
 
 FROM alpine:3.18
 RUN apk add -U --no-cache \
@@ -26,14 +26,14 @@ COPY --from=builder \
     /usr/lib/libtag.so.1 \
     /usr/lib/
 COPY --from=builder \
-    /src/gonic \
+    /src/musiqlx \
     /bin/
 VOLUME ["/cache", "/data", "/music", "/podcasts"]
 EXPOSE 80
-ENV GONIC_DB_PATH /data/gonic.db
-ENV GONIC_LISTEN_ADDR :80
-ENV GONIC_MUSIC_PATH /music
-ENV GONIC_PODCAST_PATH /podcasts
-ENV GONIC_PLAYLISTS_PATH /playlists
-ENV GONIC_CACHE_PATH /cache
-CMD ["gonic"]
+ENV MUSIQLX_DB_PATH /data/musiqlx.db
+ENV MUSIQLX_LISTEN_ADDR :80
+ENV MUSIQLX_MUSIC_PATH /music
+ENV MUSIQLX_PODCAST_PATH /podcasts
+ENV MUSIQLX_PLAYLISTS_PATH /playlists
+ENV MUSIQLX_CACHE_PATH /cache
+CMD ["musiqlx"]

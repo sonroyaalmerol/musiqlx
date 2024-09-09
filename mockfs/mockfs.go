@@ -11,9 +11,9 @@ import (
 	"testing"
 	"time"
 
-	"go.senan.xyz/gonic/db"
-	"go.senan.xyz/gonic/scanner"
-	"go.senan.xyz/gonic/tags/tagcommon"
+	"github.com/sonroyaalmerol/musiqlx/db"
+	"github.com/sonroyaalmerol/musiqlx/scanner"
+	"github.com/sonroyaalmerol/musiqlx/tags/tagcommon"
 )
 
 var ErrPathNotFound = errors.New("path not found")
@@ -302,7 +302,7 @@ func (m *MockFS) SetTags(path string, cb func(*TagInfo)) {
 func (m *MockFS) DumpDB(suffix ...string) {
 	var p []string
 	p = append(p,
-		"gonic", "dump",
+		"musiqlx", "dump",
 		strings.ReplaceAll(m.t.Name(), string(filepath.Separator), "-"),
 		fmt.Sprint(time.Now().UnixNano()),
 	)

@@ -12,7 +12,7 @@ import (
 	"sync"
 	"time"
 
-	"go.senan.xyz/gonic/fileutil"
+	"github.com/sonroyaalmerol/musiqlx/fileutil"
 )
 
 var (
@@ -233,7 +233,7 @@ func sanityCheck(basePath string) error {
 }
 
 const (
-	attrPrefix   = "#GONIC-"
+	attrPrefix   = "#MUSIQLX-"
 	attrName     = "NAME"
 	attrCommment = "COMMENT"
 	attrIsPublic = "IS-PUBLIC"

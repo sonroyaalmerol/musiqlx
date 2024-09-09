@@ -10,9 +10,9 @@ import (
 	"net/http/httputil"
 	"time"
 
-	"go.senan.xyz/gonic"
-	"go.senan.xyz/gonic/db"
-	"go.senan.xyz/gonic/scrobble"
+	"github.com/sonroyaalmerol/musiqlx"
+	"github.com/sonroyaalmerol/musiqlx/db"
+	"github.com/sonroyaalmerol/musiqlx/scrobble"
 )
 
 const (
@@ -49,7 +49,7 @@ func (c *Client) Scrobble(user db.User, track scrobble.Track, stamp time.Time, s
 				RecordingMBID:    track.MusicBrainzID,
 				ReleaseMBID:      track.MusicBrainzReleaseID,
 				Duration:         int(track.Duration.Seconds()),
-				SubmissionClient: gonic.Name,
+				SubmissionClient: musiqlx.Name,
 			},
 			ArtistName:  track.Artist,
 			TrackName:   track.Track,

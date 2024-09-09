@@ -12,9 +12,9 @@ import (
 	"time"
 
 	"github.com/jinzhu/gorm"
-	"go.senan.xyz/gonic/fileutil"
-	"go.senan.xyz/gonic/playlist"
-	"go.senan.xyz/gonic/server/ctrlsubsonic/specid"
+	"github.com/sonroyaalmerol/musiqlx/fileutil"
+	"github.com/sonroyaalmerol/musiqlx/playlist"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic/specid"
 	"gopkg.in/gormigrate.v1"
 )
 

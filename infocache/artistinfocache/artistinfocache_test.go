@@ -8,10 +8,10 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.senan.xyz/gonic/db"
-	"go.senan.xyz/gonic/lastfm"
-	"go.senan.xyz/gonic/lastfm/mockclient"
-	"go.senan.xyz/gonic/mockfs"
+	"github.com/sonroyaalmerol/musiqlx/db"
+	"github.com/sonroyaalmerol/musiqlx/lastfm"
+	"github.com/sonroyaalmerol/musiqlx/lastfm/mockclient"
+	"github.com/sonroyaalmerol/musiqlx/mockfs"
 )
 
 func TestInfoCache(t *testing.T) {

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"go.senan.xyz/gonic/mockfs"
+	"github.com/sonroyaalmerol/musiqlx/mockfs"
 )
 
 func BenchmarkScanIncremental(b *testing.B) {

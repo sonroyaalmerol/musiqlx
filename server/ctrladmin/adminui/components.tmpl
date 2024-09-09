@@ -38,7 +38,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>gonic</title>
+        <title>musiqlx</title>
         <link rel="stylesheet" href="{{ path "/admin/static/style.css" | noCache }}">
         <link rel="shortcut icon" href="{{ path "/admin/static/favicon.ico" }}" type="image/x-icon">
         <link rel="icon" href="{{ path "/admin/static/favicon.ico" }}" type="image/x-icon">
@@ -49,7 +49,7 @@
         <div class="container mx-auto min-w-min space-y-5 p-5">
             <div class="border-b-2 border-gray-300">
                 <a href="{{ path "/admin/home" }}">
-                    <img class="mx-auto w-[400px]" src="{{ path "/admin/static/gonic.png" }}">
+                    <img class="mx-auto w-[400px]" src="{{ path "/admin/static/musiqlx.png" }}">
                 </a>
             </div>
             {{ range $flash := .Flashes }}
@@ -65,7 +65,7 @@
                 <span class="text-gray-500">v{{ .Version }}</span>
                 senan kelly, 2020
                 <span class="text-gray-500">&#124;</span>
-                {{ component "ext_link" (props . "To" "https://github.com/sentriz/gonic") }}github{{ end }}
+                {{ component "ext_link" (props . "To" "https://github.com/sentriz/musiqlx") }}github{{ end }}
             </div>
         </div>
     </body>

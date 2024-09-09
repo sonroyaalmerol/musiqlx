@@ -15,13 +15,13 @@ import (
 	"github.com/disintegration/imaging"
 	"github.com/jinzhu/gorm"
 
-	"go.senan.xyz/gonic/db"
-	"go.senan.xyz/gonic/infocache/artistinfocache"
-	"go.senan.xyz/gonic/server/ctrlsubsonic/params"
-	"go.senan.xyz/gonic/server/ctrlsubsonic/spec"
-	"go.senan.xyz/gonic/server/ctrlsubsonic/specid"
-	"go.senan.xyz/gonic/server/ctrlsubsonic/specidpaths"
-	"go.senan.xyz/gonic/transcode"
+	"github.com/sonroyaalmerol/musiqlx/db"
+	"github.com/sonroyaalmerol/musiqlx/infocache/artistinfocache"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic/params"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic/spec"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic/specid"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic/specidpaths"
+	"github.com/sonroyaalmerol/musiqlx/transcode"
 )
 
 // "raw" handlers are ones that don't always return a spec response.

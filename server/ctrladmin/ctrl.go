@@ -23,13 +23,13 @@ import (
 	"github.com/philippta/go-template/html/template"
 	"github.com/sentriz/gormstore"
 
-	"go.senan.xyz/gonic"
-	"go.senan.xyz/gonic/db"
-	"go.senan.xyz/gonic/handlerutil"
-	"go.senan.xyz/gonic/lastfm"
-	"go.senan.xyz/gonic/podcast"
-	"go.senan.xyz/gonic/scanner"
-	"go.senan.xyz/gonic/server/ctrladmin/adminui"
+	"github.com/sonroyaalmerol/musiqlx"
+	"github.com/sonroyaalmerol/musiqlx/db"
+	"github.com/sonroyaalmerol/musiqlx/handlerutil"
+	"github.com/sonroyaalmerol/musiqlx/lastfm"
+	"github.com/sonroyaalmerol/musiqlx/podcast"
+	"github.com/sonroyaalmerol/musiqlx/scanner"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrladmin/adminui"
 )
 
 type CtxKey int
@@ -124,7 +124,7 @@ func New(dbc *db.DB, sessDB *gormstore.Store, scanner *scanner.Scanner, podcasts
 func withSession(sessDB *gormstore.Store) handlerutil.Middleware {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			session, err := sessDB.Get(r, gonic.Name)
+			session, err := sessDB.Get(r, musiqlx.Name)
 			if err != nil {
 				http.Error(w, fmt.Sprintf("error getting session: %s", err), 500)
 				return
@@ -233,7 +233,7 @@ func respHandler(templateFS embed.FS, resolvePath func(string) string) func(next
 			if resp.data == nil {
 				resp.data = &templateData{}
 			}
-			resp.data.Version = gonic.Version
+			resp.data.Version = musiqlx.Version
 			if session != nil {
 				resp.data.Flashes = session.Flashes()
 				if err := session.Save(r, w); err != nil {
@@ -306,7 +306,7 @@ func funcMap() template.FuncMap {
 		"noCache": func(in string) string {
 			parsed, _ := url.Parse(in)
 			params := parsed.Query()
-			params.Set("v", gonic.Version)
+			params.Set("v", musiqlx.Version)
 			parsed.RawQuery = params.Encode()
 			return parsed.String()
 		},

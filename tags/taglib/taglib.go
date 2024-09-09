@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/sentriz/audiotags"
-	"go.senan.xyz/gonic/tags/tagcommon"
+	"github.com/sonroyaalmerol/musiqlx/tags/tagcommon"
 )
 
 type TagLib struct{}

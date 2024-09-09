@@ -43,7 +43,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           release-type: simple
           changelog-path: CHANGELOG.md
-          package-name: gonic
+          package-name: musiqlx
   build-release:
     name: Build, tag, and publish Docker image
     runs-on: ubuntu-latest
@@ -90,5 +90,5 @@ jobs:
       - name: Notify
         run: |
           set +x e
-          git log -1 --pretty="push to master (@%an) %s" | curl "${{ secrets.IRC_NOTIFY_URL }}" -F target=#gonic -F message=@- >/dev/null 2>&1
+          git log -1 --pretty="push to master (@%an) %s" | curl "${{ secrets.IRC_NOTIFY_URL }}" -F target=#musiqlx -F message=@- >/dev/null 2>&1
           exit 0

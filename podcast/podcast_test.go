@@ -9,8 +9,8 @@ import (
 
 	"github.com/mmcdole/gofeed"
 	"github.com/stretchr/testify/require"
-	"go.senan.xyz/gonic/db"
-	"go.senan.xyz/gonic/mockfs"
+	"github.com/sonroyaalmerol/musiqlx/db"
+	"github.com/sonroyaalmerol/musiqlx/mockfs"
 )
 
 //go:embed testdata/rss.new

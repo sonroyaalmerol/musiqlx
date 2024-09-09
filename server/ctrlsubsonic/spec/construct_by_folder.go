@@ -3,7 +3,7 @@ package spec
 import (
 	"path/filepath"
 
-	"go.senan.xyz/gonic/db"
+	"github.com/sonroyaalmerol/musiqlx/db"
 )
 
 func NewAlbumByFolder(f *db.Album) *Album {

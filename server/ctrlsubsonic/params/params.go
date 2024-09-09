@@ -32,7 +32,7 @@ import (
 	"strconv"
 	"time"
 
-	"go.senan.xyz/gonic/server/ctrlsubsonic/specid"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic/specid"
 )
 
 var ErrNoValues = errors.New("no values provided")

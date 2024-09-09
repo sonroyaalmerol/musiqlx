@@ -18,9 +18,9 @@ import (
 	"github.com/jinzhu/gorm"
 	"github.com/mmcdole/gofeed"
 
-	"go.senan.xyz/gonic/db"
-	"go.senan.xyz/gonic/fileutil"
-	"go.senan.xyz/gonic/tags/tagcommon"
+	"github.com/sonroyaalmerol/musiqlx/db"
+	"github.com/sonroyaalmerol/musiqlx/fileutil"
+	"github.com/sonroyaalmerol/musiqlx/tags/tagcommon"
 )
 
 var ErrNoAudioInFeedItem = errors.New("no audio in feed item")

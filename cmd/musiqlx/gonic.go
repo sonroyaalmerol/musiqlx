@@ -31,23 +31,23 @@ import (
 	"golang.org/x/sync/errgroup"
 
 	"go.senan.xyz/flagconf"
-	"go.senan.xyz/gonic"
-	"go.senan.xyz/gonic/db"
-	"go.senan.xyz/gonic/handlerutil"
-	"go.senan.xyz/gonic/infocache/albuminfocache"
-	"go.senan.xyz/gonic/infocache/artistinfocache"
-	"go.senan.xyz/gonic/jukebox"
-	"go.senan.xyz/gonic/lastfm"
-	"go.senan.xyz/gonic/listenbrainz"
-	"go.senan.xyz/gonic/playlist"
-	"go.senan.xyz/gonic/podcast"
-	"go.senan.xyz/gonic/scanner"
-	"go.senan.xyz/gonic/scrobble"
-	"go.senan.xyz/gonic/server/ctrladmin"
-	"go.senan.xyz/gonic/server/ctrlsubsonic"
-	"go.senan.xyz/gonic/tags/tagcommon"
-	"go.senan.xyz/gonic/tags/taglib"
-	"go.senan.xyz/gonic/transcode"
+	"github.com/sonroyaalmerol/musiqlx"
+	"github.com/sonroyaalmerol/musiqlx/db"
+	"github.com/sonroyaalmerol/musiqlx/handlerutil"
+	"github.com/sonroyaalmerol/musiqlx/infocache/albuminfocache"
+	"github.com/sonroyaalmerol/musiqlx/infocache/artistinfocache"
+	"github.com/sonroyaalmerol/musiqlx/jukebox"
+	"github.com/sonroyaalmerol/musiqlx/lastfm"
+	"github.com/sonroyaalmerol/musiqlx/listenbrainz"
+	"github.com/sonroyaalmerol/musiqlx/playlist"
+	"github.com/sonroyaalmerol/musiqlx/podcast"
+	"github.com/sonroyaalmerol/musiqlx/scanner"
+	"github.com/sonroyaalmerol/musiqlx/scrobble"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrladmin"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic"
+	"github.com/sonroyaalmerol/musiqlx/tags/tagcommon"
+	"github.com/sonroyaalmerol/musiqlx/tags/taglib"
+	"github.com/sonroyaalmerol/musiqlx/transcode"
 )
 
 func main() {
@@ -64,9 +64,9 @@ func main() {
 	var confMusicPaths pathAliases
 	flag.Var(&confMusicPaths, "music-path", "path to music")
 
-	confPlaylistsPath := flag.String("playlists-path", "", "path to your list of new or existing m3u playlists that gonic can manage")
+	confPlaylistsPath := flag.String("playlists-path", "", "path to your list of new or existing m3u playlists that musiqlx can manage")
 
-	confDBPath := flag.String("db-path", "gonic.db", "path to database (optional)")
+	confDBPath := flag.String("db-path", "musiqlx.db", "path to database (optional)")
 
 	confScanIntervalMins := flag.Uint("scan-interval", 0, "interval (in minutes) to automatically scan music (optional)")
 	confScanAtStart := flag.Bool("scan-at-start-enabled", false, "whether to perform an initial scan at startup (optional)")
@@ -75,10 +75,10 @@ func main() {
 	confJukeboxEnabled := flag.Bool("jukebox-enabled", false, "whether the subsonic jukebox api should be enabled (optional)")
 	confJukeboxMPVExtraArgs := flag.String("jukebox-mpv-extra-args", "", "extra command line arguments to pass to the jukebox mpv daemon (optional)")
 
-	confProxyPrefix := flag.String("proxy-prefix", "", "url path prefix to use if behind proxy. eg '/gonic' (optional)")
+	confProxyPrefix := flag.String("proxy-prefix", "", "url path prefix to use if behind proxy. eg '/musiqlx' (optional)")
 	confHTTPLog := flag.Bool("http-log", true, "http request logging (optional)")
 
-	confShowVersion := flag.Bool("version", false, "show gonic version")
+	confShowVersion := flag.Bool("version", false, "show musiqlx version")
 	confConfigPath := flag.String("config-path", "", "path to config (optional)")
 
 	confExcludePattern := flag.String("exclude-pattern", "", "regex pattern to exclude files from scan (optional)")
@@ -98,7 +98,7 @@ func main() {
 	flagconf.ParseConfig(*confConfigPath)
 
 	if *confShowVersion {
-		fmt.Printf("v%s\n", gonic.Version)
+		fmt.Printf("v%s\n", musiqlx.Version)
 		os.Exit(0)
 	}
 
@@ -173,7 +173,7 @@ func main() {
 		log.Panic("differing multi artist and album artist modes have been tested yet. please set them to be the same")
 	}
 
-	log.Printf("starting gonic v%s\n", gonic.Version)
+	log.Printf("starting musiqlx v%s\n", musiqlx.Version)
 	log.Printf("provided config\n")
 	flag.VisitAll(func(f *flag.Flag) {
 		value := strings.ReplaceAll(f.Value.String(), "\n", "")
@@ -344,7 +344,7 @@ func main() {
 		defer logJob("jukebox")()
 
 		extraArgs, _ := shlex.Split(*confJukeboxMPVExtraArgs)
-		jukeboxTempDir := filepath.Join(*confCachePath, "gonic-jukebox")
+		jukeboxTempDir := filepath.Join(*confCachePath, "musiqlx-jukebox")
 		if err := os.RemoveAll(jukeboxTempDir); err != nil {
 			return fmt.Errorf("remove jubebox tmp dir: %w", err)
 		}

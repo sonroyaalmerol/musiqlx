@@ -1,5 +1,5 @@
 //nolint:gochecknoglobals,golint,stylecheck
-package gonic
+package musiqlx
 
 import (
 	_ "embed"
@@ -11,6 +11,6 @@ var version string
 var Version = strings.TrimSpace(version)
 
 const (
-	Name      = "gonic"
-	NameUpper = "GONIC"
+	Name      = "musiqlx"
+	NameUpper = "MUSIQLX"
 )

@@ -11,10 +11,10 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/require"
-	"go.senan.xyz/gonic/db"
-	"go.senan.xyz/gonic/lastfm"
-	"go.senan.xyz/gonic/lastfm/mockclient"
-	"go.senan.xyz/gonic/scrobble"
+	"github.com/sonroyaalmerol/musiqlx/db"
+	"github.com/sonroyaalmerol/musiqlx/lastfm"
+	"github.com/sonroyaalmerol/musiqlx/lastfm/mockclient"
+	"github.com/sonroyaalmerol/musiqlx/scrobble"
 )
 
 func TestArtistGetInfo(t *testing.T) {

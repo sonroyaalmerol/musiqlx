@@ -69,10 +69,10 @@
                 <p class="col-span-full text-gray-500" title="{{ .LastScanTime }}">scanned {{ .LastScanTime | dateHuman }}</p>
             {{ end }}
             <form class="col-span-full" action="{{ path "/admin/start_scan_inc_do" }}" method="post">
-                <input type="submit" title="start a incremental scan. gonic will only scan files that have changed since the last scan. it is usually quite fast" value="scan (i)">
+                <input type="submit" title="start a incremental scan. musiqlx will only scan files that have changed since the last scan. it is usually quite fast" value="scan (i)">
             </form>
             <form class="col-span-full" action="{{ path "/admin/start_scan_full_do" }}" method="post">
-                <input type="submit" title="start a slow scan. gonic will not check the timestamps of changed files. you generally shouldn't need this" value="scan slow (i)">
+                <input type="submit" title="start a slow scan. musiqlx will not check the timestamps of changed files. you generally shouldn't need this" value="scan slow (i)">
             </form>
         {{ end }}
         {{ if .IsScanning }}<p class="text-green-500 col-span-full">scan in progress...</p>{{ end }}
@@ -82,7 +82,7 @@
 {{ component "block" (props .
     "Icon" "music"
     "Name" "transcoding device profiles"
-    "Desc" "you can find your device's client name in the gonic logs. some common client names are <span class='italic text-gray-800'>DSub</span>, <span class='italic text-gray-800'>Jamstash</span>, <span class=\"italic text-gray-800\">Soundwaves</span>, or use <span class=\"italic text-gray-800\">*</span> as fallback rule for any client. see the \"transcoding profiles\" page on the wiki for more info"
+    "Desc" "you can find your device's client name in the musiqlx logs. some common client names are <span class='italic text-gray-800'>DSub</span>, <span class='italic text-gray-800'>Jamstash</span>, <span class=\"italic text-gray-800\">Soundwaves</span>, or use <span class=\"italic text-gray-800\">*</span> as fallback rule for any client. see the \"transcoding profiles\" page on the wiki for more info"
 ) }}
     <div class="grid grid-cols-[1fr_1fr_auto] gap-2 items-center justify-items-end">
         {{ range $pref := .TranscodePreferences }}
@@ -106,7 +106,7 @@
 {{ component "block" (props .
     "Icon" "lastfm"
     "Name" "last.fm"
-    "Desc" "scrobble to last.fm on a per user basis. adding an api key will also help gonic get rich artist info and images for subsonic clients"
+    "Desc" "scrobble to last.fm on a per user basis. adding an api key will also help musiqlx get rich artist info and images for subsonic clients"
 ) }}
     <div class="flex flex-col gap-2 items-end">
     {{ if .CurrentLastFMAPIKey }}

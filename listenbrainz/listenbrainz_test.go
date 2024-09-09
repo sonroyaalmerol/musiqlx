@@ -12,9 +12,9 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/require"
-	"go.senan.xyz/gonic/db"
-	"go.senan.xyz/gonic/listenbrainz"
-	"go.senan.xyz/gonic/scrobble"
+	"github.com/sonroyaalmerol/musiqlx/db"
+	"github.com/sonroyaalmerol/musiqlx/listenbrainz"
+	"github.com/sonroyaalmerol/musiqlx/scrobble"
 )
 
 func TestScrobble(t *testing.T) {

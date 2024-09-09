@@ -5,9 +5,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"go.senan.xyz/gonic/db"
-	"go.senan.xyz/gonic/fileutil"
-	"go.senan.xyz/gonic/server/ctrlsubsonic/specid"
+	"github.com/sonroyaalmerol/musiqlx/db"
+	"github.com/sonroyaalmerol/musiqlx/fileutil"
+	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic/specid"
 )
 
 var (

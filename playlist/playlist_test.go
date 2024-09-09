@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
-	"go.senan.xyz/gonic/playlist"
+	"github.com/sonroyaalmerol/musiqlx/playlist"
 )
 
 func TestPlaylist(t *testing.T) {
