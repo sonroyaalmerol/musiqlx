@@ -167,7 +167,7 @@ func TestUpdatedTags(t *testing.T) {
 	assert.Equal(t, "album-artist-upd", trackArtistB.Name)                                                                                                                          // updated has tags
 }
 
-// https://github.com/sentriz/musiqlx/issues/225
+// https://github.com/sonroyaalmerol/musiqlx/issues/225
 func TestUpdatedAlbumGenre(t *testing.T) {
 	t.Parallel()
 	m := mockfs.New(t)
@@ -542,7 +542,7 @@ func TestTagErrors(t *testing.T) {
 	assert.Equal(t, 0, st.SeenTracksNew())                // we have no new tracks
 }
 
-// https://github.com/sentriz/musiqlx/issues/185#issuecomment-1050092128
+// https://github.com/sonroyaalmerol/musiqlx/issues/185#issuecomment-1050092128
 func TestCompilationAlbumWithoutAlbumArtist(t *testing.T) {
 	t.Parallel()
 	m := mockfs.New(t)
@@ -598,7 +598,7 @@ func TestIncrementalScanNoChangeNoUpdatedAt(t *testing.T) {
 	assert.Equal(t, albumB.UpdatedAt, albumA.UpdatedAt)
 }
 
-// https://github.com/sentriz/musiqlx/issues/230
+// https://github.com/sonroyaalmerol/musiqlx/issues/230
 func TestAlbumAndArtistSameNameWeirdness(t *testing.T) {
 	t.Parallel()
 	m := mockfs.New(t)
@@ -643,7 +643,7 @@ func TestNoOrphanedGenres(t *testing.T) {
 	assert.Equal(t, 0, genreCount)
 }
 
-// https://github.com/sentriz/musiqlx/issues/466
+// https://github.com/sonroyaalmerol/musiqlx/issues/466
 func TestNoOrphanedGenresButOnlyDeleteTracks(t *testing.T) {
 	t.Parallel()
 	m := mockfs.New(t)
@@ -803,7 +803,7 @@ func TestMultiArtistPreload(t *testing.T) {
 	}
 }
 
-// https://github.com/sentriz/musiqlx/issues/402
+// https://github.com/sonroyaalmerol/musiqlx/issues/402
 func TestRootNoClobberOnError(t *testing.T) {
 	t.Parallel()
 	m := mockfs.New(t)
@@ -823,7 +823,7 @@ func TestRootNoClobberOnError(t *testing.T) {
 	require.Equal(t, 0, roots[0].ParentID)
 }
 
-// https://github.com/sentriz/musiqlx/issues/437
+// https://github.com/sonroyaalmerol/musiqlx/issues/437
 func TestPrefixOverlap(t *testing.T) {
 	t.Parallel()
 
@@ -846,7 +846,7 @@ func TestPrefixOverlap(t *testing.T) {
 	require.Greater(t, tagged, 1)
 }
 
-// https://github.com/sentriz/musiqlx/pull/448
+// https://github.com/sonroyaalmerol/musiqlx/pull/448
 func TestParseMultiDoubleDelim(t *testing.T) {
 	t.Parallel()
 

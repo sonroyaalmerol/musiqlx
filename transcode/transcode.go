@@ -1,5 +1,6 @@
 // author: spijet (https://github.com/spijet/)
 // author: sentriz (https://github.com/sentriz/)
+// author: sonroyaalmerol (https://github.com/sonroyaalmerol/)
 
 //nolint:gochecknoglobals
 package transcode
