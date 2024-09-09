@@ -30,7 +30,6 @@ import (
 	"github.com/sentriz/gormstore"
 	"golang.org/x/sync/errgroup"
 
-	"go.senan.xyz/flagconf"
 	"github.com/sonroyaalmerol/musiqlx"
 	"github.com/sonroyaalmerol/musiqlx/db"
 	"github.com/sonroyaalmerol/musiqlx/handlerutil"
@@ -48,6 +47,7 @@ import (
 	"github.com/sonroyaalmerol/musiqlx/tags/tagcommon"
 	"github.com/sonroyaalmerol/musiqlx/tags/taglib"
 	"github.com/sonroyaalmerol/musiqlx/transcode"
+	"go.senan.xyz/flagconf"
 )
 
 func main() {
