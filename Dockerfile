@@ -1,9 +1,10 @@
-FROM alpine:3.19 AS builder-taglib
+FROM alpine:3.20 AS builder-taglib
 WORKDIR /tmp
 COPY alpine/taglib/APKBUILD .
 RUN apk update && \
-    apk add --no-cache abuild && \
+    apk add --no-cache abuild alpine-sdk && \
     abuild-keygen -a -n && \
+    cp /root/.abuild/*.pub /etc/apk/keys/ && \
     REPODEST=/pkgs abuild -F -r
 
 FROM golang:1.22-alpine AS builder
@@ -26,8 +27,8 @@ RUN go mod download
 COPY . .
 RUN GOOS=linux go build -o musiqlx cmd/musiqlx/musiqlx.go
 
-FROM alpine:3.19
-LABEL org.opencontainers.image.source https://github.com/sentriz/musiqlx
+FROM alpine:3.20
+LABEL org.opencontainers.image.source https://github.com/sonroyaalmerol/musiqlx
 RUN apk add -U --no-cache \
     ffmpeg \
     mpv \
