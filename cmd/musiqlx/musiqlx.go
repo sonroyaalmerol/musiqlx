@@ -39,13 +39,8 @@ import (
 	"github.com/sonroyaalmerol/musiqlx/lastfm"
 	"github.com/sonroyaalmerol/musiqlx/listenbrainz"
 	"github.com/sonroyaalmerol/musiqlx/playlist"
-	"github.com/sonroyaalmerol/musiqlx/podcast"
-	"github.com/sonroyaalmerol/musiqlx/scanner"
 	"github.com/sonroyaalmerol/musiqlx/scrobble"
-	"github.com/sonroyaalmerol/musiqlx/server/ctrladmin"
 	"github.com/sonroyaalmerol/musiqlx/server/ctrlsubsonic"
-	"github.com/sonroyaalmerol/musiqlx/tags/tagcommon"
-	"github.com/sonroyaalmerol/musiqlx/tags/taglib"
 	"github.com/sonroyaalmerol/musiqlx/transcode"
 	"go.senan.xyz/flagconf"
 )
@@ -56,9 +51,6 @@ func main() {
 	confTLSCert := flag.String("tls-cert", "", "path to TLS certificate (optional)")
 	confTLSKey := flag.String("tls-key", "", "path to TLS private key (optional)")
 
-	confPodcastPurgeAgeDays := flag.Uint("podcast-purge-age", 0, "age (in days) to purge podcast episodes if not accessed (optional)")
-	confPodcastPath := flag.String("podcast-path", "", "path to podcasts")
-
 	confCachePath := flag.String("cache-path", "", "path to cache")
 
 	var confMusicPaths pathAliases
@@ -67,10 +59,6 @@ func main() {
 	confPlaylistsPath := flag.String("playlists-path", "", "path to your list of new or existing m3u playlists that musiqlx can manage")
 
 	confDBPath := flag.String("db-path", "musiqlx.db", "path to database (optional)")
-
-	confScanIntervalMins := flag.Uint("scan-interval", 0, "interval (in minutes) to automatically scan music (optional)")
-	confScanAtStart := flag.Bool("scan-at-start-enabled", false, "whether to perform an initial scan at startup (optional)")
-	confScanWatcher := flag.Bool("scan-watcher-enabled", false, "whether to watch file system for new music and rescan (optional)")
 
 	confJukeboxEnabled := flag.Bool("jukebox-enabled", false, "whether the subsonic jukebox api should be enabled (optional)")
 	confJukeboxMPVExtraArgs := flag.String("jukebox-mpv-extra-args", "", "extra command line arguments to pass to the jukebox mpv daemon (optional)")
@@ -83,15 +71,8 @@ func main() {
 
 	confExcludePattern := flag.String("exclude-pattern", "", "regex pattern to exclude files from scan (optional)")
 
-	var confMultiValueGenre, confMultiValueArtist, confMultiValueAlbumArtist multiValueSetting
-	flag.Var(&confMultiValueGenre, "multi-value-genre", "setting for mutli-valued genre scanning (optional)")
-	flag.Var(&confMultiValueArtist, "multi-value-artist", "setting for mutli-valued track artist scanning (optional)")
-	flag.Var(&confMultiValueAlbumArtist, "multi-value-album-artist", "setting for mutli-valued album artist scanning (optional)")
-
 	confPprof := flag.Bool("pprof", false, "enable the /debug/pprof endpoint (optional)")
 	confExpvar := flag.Bool("expvar", false, "enable the /debug/vars endpoint (optional)")
-
-	deprecatedConfGenreSplit := flag.String("genre-split", "", "(deprecated, see multi-value settings)")
 
 	flag.Parse()
 	flagconf.ParseEnv()
@@ -117,9 +98,6 @@ func main() {
 		}
 	}
 
-	if *confPodcastPath, err = validatePath(*confPodcastPath); err != nil {
-		log.Fatalf("checking podcast directory: %v", err)
-	}
 	if *confCachePath, err = validatePath(*confCachePath); err != nil {
 		log.Fatalf("checking cache directory: %v", err)
 	}
@@ -147,7 +125,6 @@ func main() {
 		DBPath:            *confDBPath,
 		OriginalMusicPath: confMusicPaths[0].path,
 		PlaylistsPath:     *confPlaylistsPath,
-		PodcastsPath:      *confPodcastPath,
 	})
 	if err != nil {
 		log.Panicf("error migrating database: %v\n", err)
@@ -161,18 +138,6 @@ func main() {
 	proxyPrefixExpr := regexp.MustCompile(`^\/*(.*?)\/*$`)
 	*confProxyPrefix = proxyPrefixExpr.ReplaceAllString(*confProxyPrefix, `/$1`)
 
-	if *deprecatedConfGenreSplit != "" && *deprecatedConfGenreSplit != "\n" {
-		confMultiValueGenre = multiValueSetting{Mode: scanner.Delim, Delim: *deprecatedConfGenreSplit}
-		*deprecatedConfGenreSplit = "<deprecated>"
-	}
-	if confMultiValueArtist.Mode == scanner.None && confMultiValueAlbumArtist.Mode > scanner.None {
-		confMultiValueArtist.Mode = confMultiValueAlbumArtist.Mode
-		confMultiValueArtist.Delim = confMultiValueAlbumArtist.Delim
-	}
-	if confMultiValueArtist.Mode != confMultiValueAlbumArtist.Mode {
-		log.Panic("differing multi artist and album artist modes have been tested yet. please set them to be the same")
-	}
-
 	log.Printf("starting musiqlx v%s\n", musiqlx.Version)
 	log.Printf("provided config\n")
 	flag.VisitAll(func(f *flag.Flag) {
@@ -180,24 +145,6 @@ func main() {
 		log.Printf("    %-25s %s\n", f.Name, value)
 	})
 
-	tagReader := tagcommon.ChainReader{
-		taglib.TagLib{},
-		// ffprobe reader?
-		// nfo reader?
-	}
-
-	scannr := scanner.New(
-		ctrlsubsonic.MusicPaths(musicPaths),
-		dbc,
-		map[scanner.Tag]scanner.MultiValueSetting{
-			scanner.Genre:       scanner.MultiValueSetting(confMultiValueGenre),
-			scanner.Artist:      scanner.MultiValueSetting(confMultiValueArtist),
-			scanner.AlbumArtist: scanner.MultiValueSetting(confMultiValueAlbumArtist),
-		},
-		tagReader,
-		*confExcludePattern,
-	)
-	podcast := podcast.New(dbc, *confPodcastPath, tagReader)
 	transcoder := transcode.NewCachingTranscoder(
 		transcode.NewFFmpegTranscoder(),
 		cacheDirAudio,
@@ -250,11 +197,7 @@ func main() {
 		return url.String()
 	}
 
-	ctrlAdmin, err := ctrladmin.New(dbc, sessDB, scannr, podcast, lastfmClient, resolveProxyPath)
-	if err != nil {
-		log.Panicf("error creating admin controller: %v\n", err)
-	}
-	ctrlSubsonic, err := ctrlsubsonic.New(dbc, scannr, musicPaths, *confPodcastPath, cacheDirAudio, cacheDirCovers, jukebx, playlistStore, scrobblers, podcast, transcoder, lastfmClient, artistInfoCache, albumInfoCache, resolveProxyPath)
+	ctrlSubsonic, err := ctrlsubsonic.New(dbc, musicPaths, cacheDirAudio, cacheDirCovers, jukebx, playlistStore, scrobblers, transcoder, lastfmClient, artistInfoCache, albumInfoCache, resolveProxyPath)
 	if err != nil {
 		log.Panicf("error creating subsonic controller: %v\n", err)
 	}
@@ -270,7 +213,6 @@ func main() {
 	trim := handlerutil.TrimPathSuffix(".view") // /x.view and /x should match the same
 
 	mux := http.NewServeMux()
-	mux.Handle("/admin/", http.StripPrefix("/admin", chain(ctrlAdmin)))
 	mux.Handle("/rest/", http.StripPrefix("/rest", chain(trim(ctrlSubsonic))))
 	mux.Handle("/ping", chain(handlerutil.Message("ok")))
 	mux.Handle("/", chain(http.RedirectHandler(resolveProxyPath("/admin/home"), http.StatusSeeOther)))
@@ -327,16 +269,6 @@ func main() {
 	})
 
 	errgrp.Go(func() error {
-		if !*confScanWatcher {
-			return nil
-		}
-
-		defer logJob("scan watcher")()
-
-		return scannr.ExecuteWatch(ctx)
-	})
-
-	errgrp.Go(func() error {
 		if jukebx == nil {
 			return nil
 		}
@@ -368,58 +300,6 @@ func main() {
 	})
 
 	errgrp.Go(func() error {
-		defer logJob("podcast refresh")()
-
-		ctxTick(ctx, 1*time.Hour, func() {
-			if err := podcast.RefreshPodcasts(); err != nil {
-				log.Printf("failed to refresh some feeds: %s", err)
-			}
-		})
-		return nil
-	})
-
-	errgrp.Go(func() error {
-		defer logJob("podcast download")()
-
-		ctxTick(ctx, 5*time.Second, func() {
-			if err := podcast.DownloadTick(); err != nil {
-				log.Printf("failed to download podcast: %s", err)
-			}
-		})
-		return nil
-	})
-
-	errgrp.Go(func() error {
-		if *confPodcastPurgeAgeDays == 0 {
-			return nil
-		}
-
-		defer logJob("podcast purge")()
-
-		ctxTick(ctx, 24*time.Hour, func() {
-			if err := podcast.PurgeOldPodcasts(time.Duration(*confPodcastPurgeAgeDays) * 24 * time.Hour); err != nil {
-				log.Printf("error purging old podcasts: %v", err)
-			}
-		})
-		return nil
-	})
-
-	errgrp.Go(func() error {
-		if *confScanIntervalMins == 0 {
-			return nil
-		}
-
-		defer logJob("scan timer")()
-
-		ctxTick(ctx, time.Duration(*confScanIntervalMins)*time.Minute, func() {
-			if _, err := scannr.ScanAndClean(scanner.ScanOptions{}); err != nil {
-				log.Printf("error scanning: %v", err)
-			}
-		})
-		return nil
-	})
-
-	errgrp.Go(func() error {
 		if _, _, err := lastfmClientKeySecretFunc(); err != nil {
 			return nil
 		}
@@ -431,19 +311,6 @@ func main() {
 				log.Printf("error in artist info cache: %v", err)
 			}
 		})
-		return nil
-	})
-
-	errgrp.Go(func() error {
-		if !*confScanAtStart {
-			return nil
-		}
-
-		defer logJob("scan at start")()
-
-		if _, err := scannr.ScanAndClean(scanner.ScanOptions{}); err != nil {
-			log.Printf("error scanning on start: %v", err)
-		}
 		return nil
 	})
 
@@ -494,37 +361,6 @@ func validatePath(p string) (string, error) {
 		return "", fmt.Errorf("make absolute: %w", err)
 	}
 	return p, nil
-}
-
-type multiValueSetting scanner.MultiValueSetting
-
-func (mvs multiValueSetting) String() string {
-	switch mvs.Mode {
-	case scanner.Delim:
-		return fmt.Sprintf("delim(%s)", mvs.Delim)
-	case scanner.Multi:
-		return "multi"
-	default:
-		return "none"
-	}
-}
-
-func (mvs *multiValueSetting) Set(value string) error {
-	mode, delim, _ := strings.Cut(value, " ")
-	switch mode {
-	case "delim":
-		if delim == "" {
-			return fmt.Errorf("no delimiter provided for delimiter mode")
-		}
-		mvs.Mode = scanner.Delim
-		mvs.Delim = delim
-	case "multi":
-		mvs.Mode = scanner.Multi
-	case "none":
-	default:
-		return fmt.Errorf(`unknown multi value mode %q. should be "none" | "multi" | "delim <delim>"`, mode)
-	}
-	return nil
 }
 
 func logJob(jobName string) func() {

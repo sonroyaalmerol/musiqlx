@@ -1,12 +1,3 @@
-FROM alpine:3.20 AS builder-taglib
-WORKDIR /tmp
-COPY alpine/taglib/APKBUILD .
-RUN apk update && \
-    apk add --no-cache abuild alpine-sdk && \
-    abuild-keygen -a -n && \
-    cp /root/.abuild/*.pub /etc/apk/keys/ && \
-    REPODEST=/pkgs abuild -F -r
-
 FROM golang:1.22-alpine AS builder
 RUN apk add -U --no-cache \
     build-base \
@@ -15,10 +6,6 @@ RUN apk add -U --no-cache \
     sqlite \
     zlib-dev \
     go
-
-# TODO: delete this block when taglib v2 is on alpine packages
-COPY --from=builder-taglib /pkgs/*/*.apk /pkgs/
-RUN apk add --no-cache --allow-untrusted /pkgs/*
 
 WORKDIR /src
 COPY go.mod .

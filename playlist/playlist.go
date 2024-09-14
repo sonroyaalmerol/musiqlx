@@ -11,8 +11,6 @@ import (
 	"strings"
 	"sync"
 	"time"
-
-	"github.com/sonroyaalmerol/musiqlx/fileutil"
 )
 
 var (
@@ -254,7 +252,6 @@ func decodeAttr(line string) (name, value string) {
 }
 
 func NewPath(userID int, playlistName string) string {
-	playlistName = fileutil.Safe(playlistName)
 	if playlistName == "" {
 		playlistName = "pl"
 	}
