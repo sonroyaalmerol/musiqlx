@@ -1,0 +1,441 @@
+syntax = "proto3";
+
+service YTMusicAPI {
+  // Reference
+  rpc Init (InitRequest) returns (InitResponse);
+  
+  // Setup
+  rpc Setup (SetupRequest) returns (SetupResponse);
+  rpc SetupOAuth (SetupOAuthRequest) returns (SetupOAuthResponse);
+  
+  // Search
+  rpc Search (SearchRequest) returns (SearchResponse);
+  rpc GetSearchSuggestions (GetSearchSuggestionsRequest) returns (GetSearchSuggestionsResponse);
+  
+  // Browsing
+  rpc GetHome (GetHomeRequest) returns (GetHomeResponse);
+  rpc GetArtist (GetArtistRequest) returns (GetArtistResponse);
+  rpc GetArtistAlbums (GetArtistAlbumsRequest) returns (GetArtistAlbumsResponse);
+  rpc GetAlbum (GetAlbumRequest) returns (GetAlbumResponse);
+  rpc GetAlbumBrowseId (GetAlbumBrowseIdRequest) returns (GetAlbumBrowseIdResponse);
+  rpc GetUser (GetUserRequest) returns (GetUserResponse);
+  rpc GetUserPlaylists (GetUserPlaylistsRequest) returns (GetUserPlaylistsResponse);
+  rpc GetUserVideos (GetUserVideosRequest) returns (GetUserVideosResponse);
+  rpc GetSong (GetSongRequest) returns (GetSongResponse);
+  rpc GetSongRelated (GetSongRelatedRequest) returns (GetSongRelatedResponse);
+  rpc GetLyrics (GetLyricsRequest) returns (GetLyricsResponse);
+  rpc GetTasteProfile (GetTasteProfileRequest) returns (GetTasteProfileResponse);
+  rpc SetTasteProfile (SetTasteProfileRequest) returns (SetTasteProfileResponse);
+  
+  // Explore
+  rpc GetMoodCategories (GetMoodCategoriesRequest) returns (GetMoodCategoriesResponse);
+  rpc GetMoodPlaylists (GetMoodPlaylistsRequest) returns (GetMoodPlaylistsResponse);
+  rpc GetCharts (GetChartsRequest) returns (GetChartsResponse);
+  
+  // Watch
+  rpc GetWatchPlaylist (GetWatchPlaylistRequest) returns (GetWatchPlaylistResponse);
+  
+  // Library
+  rpc GetLibraryPlaylists (GetLibraryPlaylistsRequest) returns (GetLibraryPlaylistsResponse);
+  rpc GetLibrarySongs (GetLibrarySongsRequest) returns (GetLibrarySongsResponse);
+  rpc GetLibraryAlbums (GetLibraryAlbumsRequest) returns (GetLibraryAlbumsResponse);
+  rpc GetLibraryArtists (GetLibraryArtistsRequest) returns (GetLibraryArtistsResponse);
+  rpc GetLibrarySubscriptions (GetLibrarySubscriptionsRequest) returns (GetLibrarySubscriptionsResponse);
+  rpc GetLibraryPodcasts (GetLibraryPodcastsRequest) returns (GetLibraryPodcastsResponse);
+  rpc GetLibraryChannels (GetLibraryChannelsRequest) returns (GetLibraryChannelsResponse);
+  rpc GetLikedSongs (GetLikedSongsRequest) returns (GetLikedSongsResponse);
+  rpc GetSavedEpisodes (GetSavedEpisodesRequest) returns (GetSavedEpisodesResponse);
+  rpc GetHistory (GetHistoryRequest) returns (GetHistoryResponse);
+  rpc AddHistoryItem (AddHistoryItemRequest) returns (AddHistoryItemResponse);
+  rpc RemoveHistoryItems (RemoveHistoryItemsRequest) returns (RemoveHistoryItemsResponse);
+  rpc RateSong (RateSongRequest) returns (RateSongResponse);
+  rpc EditSongLibraryStatus (EditSongLibraryStatusRequest) returns (EditSongLibraryStatusResponse);
+  rpc RatePlaylist (RatePlaylistRequest) returns (RatePlaylistResponse);
+  rpc SubscribeArtists (SubscribeArtistsRequest) returns (SubscribeArtistsResponse);
+  rpc UnsubscribeArtists (UnsubscribeArtistsRequest) returns (UnsubscribeArtistsResponse);
+  rpc GetAccountInfo (GetAccountInfoRequest) returns (GetAccountInfoResponse);
+  
+  // Playlists
+  rpc GetPlaylist (GetPlaylistRequest) returns (GetPlaylistResponse);
+  rpc CreatePlaylist (CreatePlaylistRequest) returns (CreatePlaylistResponse);
+  rpc EditPlaylist (EditPlaylistRequest) returns (EditPlaylistResponse);
+  rpc DeletePlaylist (DeletePlaylistRequest) returns (DeletePlaylistResponse);
+  rpc AddPlaylistItems (AddPlaylistItemsRequest) returns (AddPlaylistItemsResponse);
+  rpc RemovePlaylistItems (RemovePlaylistItemsRequest) returns (RemovePlaylistItemsResponse);
+  
+  // Podcasts
+  rpc GetChannel (GetChannelRequest) returns (GetChannelResponse);
+  rpc GetChannelEpisodes (GetChannelEpisodesRequest) returns (GetChannelEpisodesResponse);
+  rpc GetPodcast (GetPodcastRequest) returns (GetPodcastResponse);
+  rpc GetEpisode (GetEpisodeRequest) returns (GetEpisodeResponse);
+  rpc GetEpisodesPlaylist (GetEpisodesPlaylistRequest) returns (GetEpisodesPlaylistResponse);
+  
+  // Uploads
+  rpc GetLibraryUploadSongs (GetLibraryUploadSongsRequest) returns (GetLibraryUploadSongsResponse);
+  rpc GetLibraryUploadArtists (GetLibraryUploadArtistsRequest) returns (GetLibraryUploadArtistsResponse);
+  rpc GetLibraryUploadAlbums (GetLibraryUploadAlbumsRequest) returns (GetLibraryUploadAlbumsResponse);
+  rpc GetLibraryUploadArtist (GetLibraryUploadArtistRequest) returns (GetLibraryUploadArtistResponse);
+  rpc GetLibraryUploadAlbum (GetLibraryUploadAlbumRequest) returns (GetLibraryUploadAlbumResponse);
+  rpc UploadSong (UploadSongRequest) returns (UploadSongResponse);
+  rpc DeleteUploadEntity (DeleteUploadEntityRequest) returns (DeleteUploadEntityResponse);
+}
+
+// Request and Response messages for each RPC
+message InitRequest {
+}
+message InitResponse {
+}
+
+message SetupRequest {
+}
+message SetupResponse {
+}
+
+message SetupOAuthRequest {
+}
+message SetupOAuthResponse {
+}
+
+message SearchRequest {
+  string query = 1;
+}
+message SearchResponse {
+  repeated string results = 1;
+}
+
+message GetSearchSuggestionsRequest {
+  string query = 1;
+}
+message GetSearchSuggestionsResponse {
+  repeated string suggestions = 1;
+}
+
+message GetHomeRequest {
+}
+message GetHomeResponse {
+}
+
+message GetArtistRequest {
+  string artistId = 1;
+}
+message GetArtistResponse {
+  string name = 1;
+}
+
+message GetArtistAlbumsRequest {
+  string artistId = 1;
+}
+message GetArtistAlbumsResponse {
+  repeated string albumIds = 1;
+}
+
+message GetAlbumRequest {
+  string albumId = 1;
+}
+message GetAlbumResponse {
+  string title = 1;
+}
+
+message GetAlbumBrowseIdRequest {
+  string albumId = 1;
+}
+message GetAlbumBrowseIdResponse {
+  string browseId = 1;
+}
+
+message GetUserRequest {
+  string userId = 1;
+}
+message GetUserResponse {
+  string username = 1;
+}
+
+message GetUserPlaylistsRequest {
+  string userId = 1;
+}
+message GetUserPlaylistsResponse {
+  repeated string playlistIds = 1;
+}
+
+message GetUserVideosRequest {
+  string userId = 1;
+}
+message GetUserVideosResponse {
+  repeated string videoIds = 1;
+}
+
+message GetSongRequest {
+  string songId = 1;
+}
+message GetSongResponse {
+  string title = 1;
+}
+
+message GetSongRelatedRequest {
+  string songId = 1;
+}
+message GetSongRelatedResponse {
+  repeated string relatedSongIds = 1;
+}
+
+message GetLyricsRequest {
+  string songId = 1;
+}
+message GetLyricsResponse {
+  string lyrics = 1;
+}
+
+message GetTasteProfileRequest {
+}
+message GetTasteProfileResponse {
+}
+
+message SetTasteProfileRequest {
+  repeated string artistIds = 1;
+}
+message SetTasteProfileResponse {
+}
+
+message GetMoodCategoriesRequest {
+}
+message GetMoodCategoriesResponse {
+}
+
+message GetMoodPlaylistsRequest {
+  string moodCategory = 1;
+}
+message GetMoodPlaylistsResponse {
+  repeated string playlistIds = 1;
+}
+
+message GetChartsRequest {
+}
+message GetChartsResponse {
+}
+
+message GetWatchPlaylistRequest {
+  string playlistId = 1;
+}
+message GetWatchPlaylistResponse {
+  repeated string videoIds = 1;
+}
+
+message GetLibraryPlaylistsRequest {
+}
+message GetLibraryPlaylistsResponse {
+}
+
+message GetLibrarySongsRequest {
+}
+message GetLibrarySongsResponse {
+}
+
+message GetLibraryAlbumsRequest {
+}
+message GetLibraryAlbumsResponse {
+}
+
+message GetLibraryArtistsRequest {
+}
+message GetLibraryArtistsResponse {
+}
+
+message GetLibrarySubscriptionsRequest {
+}
+message GetLibrarySubscriptionsResponse {
+}
+
+message GetLibraryPodcastsRequest {
+}
+message GetLibraryPodcastsResponse {
+}
+
+message GetLibraryChannelsRequest {
+}
+message GetLibraryChannelsResponse {
+}
+
+message GetLikedSongsRequest {
+}
+message GetLikedSongsResponse {
+}
+
+message GetSavedEpisodesRequest {
+}
+message GetSavedEpisodesResponse {
+}
+
+message GetHistoryRequest {
+}
+message GetHistoryResponse {
+}
+
+message AddHistoryItemRequest {
+  string itemId = 1;
+}
+message AddHistoryItemResponse {
+}
+
+message RemoveHistoryItemsRequest {
+  repeated string itemIds = 1;
+}
+message RemoveHistoryItemsResponse {
+}
+
+message RateSongRequest {
+  string songId = 1;
+  string rating = 2;
+}
+message RateSongResponse {
+}
+
+message EditSongLibraryStatusRequest {
+  string songId = 1;
+  string status = 2;
+}
+message EditSongLibraryStatusResponse {
+}
+
+message RatePlaylistRequest {
+  string playlistId = 1;
+  string rating = 2;
+}
+message RatePlaylistResponse {
+}
+
+message SubscribeArtistsRequest {
+  repeated string artistIds = 1;
+}
+message SubscribeArtistsResponse {
+}
+
+message UnsubscribeArtistsRequest {
+  repeated string artistIds = 1;
+}
+message UnsubscribeArtistsResponse {
+}
+
+message GetAccountInfoRequest {
+}
+message GetAccountInfoResponse {
+}
+
+message GetPlaylistRequest {
+  string playlistId = 1;
+}
+message GetPlaylistResponse {
+  string title = 1;
+}
+
+message CreatePlaylistRequest {
+  string title = 1;
+  repeated string songIds = 2;
+}
+message CreatePlaylistResponse {
+  string playlistId = 1;
+}
+
+message EditPlaylistRequest {
+  string playlistId = 1;
+  string newTitle = 2;
+  repeated string newSongIds = 3;
+}
+message EditPlaylistResponse {
+}
+
+message DeletePlaylistRequest {
+  string playlistId = 1;
+}
+message DeletePlaylistResponse {
+}
+
+message AddPlaylistItemsRequest {
+  string playlistId = 1;
+  repeated string songIds = 2;
+}
+message AddPlaylistItemsResponse {
+}
+
+message RemovePlaylistItemsRequest {
+  string playlistId = 1;
+  repeated string songIds = 2;
+}
+message RemovePlaylistItemsResponse {
+}
+
+message GetChannelRequest {
+  string channelId = 1;
+}
+message GetChannelResponse {
+  string title = 1;
+}
+
+message GetChannelEpisodesRequest {
+  string channelId = 1;
+}
+message GetChannelEpisodesResponse {
+  repeated string episodeIds = 1;
+}
+
+message GetPodcastRequest {
+  string podcastId = 1;
+}
+message GetPodcastResponse {
+  string title = 1;
+}
+
+message GetEpisodeRequest {
+  string episodeId = 1;
+}
+message GetEpisodeResponse {
+  string title = 1;
+}
+
+message GetEpisodesPlaylistRequest {
+  string playlistId = 1;
+}
+message GetEpisodesPlaylistResponse {
+  repeated string episodeIds = 1;
+}
+
+message GetLibraryUploadSongsRequest {
+}
+message GetLibraryUploadSongsResponse {
+}
+
+message GetLibraryUploadArtistsRequest {
+}
+message GetLibraryUploadArtistsResponse {
+}
+
+message GetLibraryUploadAlbumsRequest {
+}
+message GetLibraryUploadAlbumsResponse {
+}
+
+message GetLibraryUploadArtistRequest {
+  string artistId = 1;
+}
+message GetLibraryUploadArtistResponse {
+  string name = 1;
+}
+
+message GetLibraryUploadAlbumRequest {
+  string albumId = 1;
+}
+message GetLibraryUploadAlbumResponse {
+  string title = 1;
+}
+
+message UploadSongRequest {
+  string filePath = 1;
+}
+message UploadSongResponse {
+  string songId = 1;
+}
+
+message DeleteUploadEntityRequest {
+  string entityId = 1;
+}
+message DeleteUploadEntityResponse {
+}
